@@ -33,7 +33,7 @@ EXEC Insert_Product
 
 ### b. Thay đổi hàng đã có (UPDATE)
 Lưu ý: 
-- Chỉ thay đổi trạng thái thành 'Active' khi đã gán ảnh và danh mục.
+- Chỉ thay đổi trạng thái thành `Active` khi đã gán ảnh và danh mục.
 - Báo lỗi khi dữ liệu bị rỗng, sai khoảng dữ liệu hợp lệ.
 - Báo lỗi khi đã có sản phẩm cùng tên cùng cửa hàng.
 
@@ -50,7 +50,7 @@ EXEC Update_Product
 ### c. Xóa hàng (DELETE)
 Lưu ý:
 - Xóa hẳn khi sản phẩm chưa có đơn nào.
-- Chuyển trạng thái về 'Deleted' khi đã có đơn.
+- Chuyển trạng thái về `Deleted` khi đã có đơn.
 - Báo lỗi khi sản phẩm chưa tồn tại.
 
 ```sql
