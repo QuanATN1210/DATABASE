@@ -743,6 +743,179 @@ INSERT INTO Danh_gia (Product_id, Order_id, So_sao, Noi_dung_binh_luan, Phan_hoi
 (8, 8, 4, N'Áo đẹp, hình in sắc nét, nhưng vải hơi dày mặc mùa hè hơi nóng.', NULL);
 GO
 
+-----INSERT THÊM DỮ LIỆU
+-- Thêm sản phẩm mới cho Store 1 (Samsung) - Trạng thái Active ngay từ đầu
+INSERT INTO Product (Store_id, Ten_san_pham, Mo_ta_chi_tiet, Tinh_trang, Trong_luong, Trang_thai_dang) VALUES
+(1, N'Samsung Galaxy Buds2 Pro', N'Tai nghe không dây, chống ồn chủ động ANC', 'New', 0.05, 'Active'),
+(1, N'Samsung Galaxy Watch 6', N'Đồng hồ thông minh, theo dõi sức khỏe 24/7', 'New', 0.3, 'Active'),
+(1, N'Samsung Smart TV 55 inch QLED', N'Tivi QLED 4K, Quantum HDR', 'New', 15.0, 'Active');
+GO
+
+-- Thêm sản phẩm mới cho Store 2 (Coolmate) - Trạng thái Active ngay từ đầu
+INSERT INTO Product (Store_id, Ten_san_pham, Mo_ta_chi_tiet, Tinh_trang, Trong_luong, Trang_thai_dang) VALUES
+(2, N'Quần Short Nam Excool', N'Quần short thể thao, vải thoáng mát', 'New', 0.2, 'Active'),
+(2, N'Áo Sơ Mi Nam Basic', N'Áo sơ mi oxford, form regular fit', 'New', 0.25, 'Active'),
+(2, N'Áo Khoác Gió Nam', N'Áo khoác chống nước, nhẹ, gọn', 'New', 0.4, 'Active');
+GO
+
+-- Thêm sản phẩm mới cho Store 3 (Fahasa) - Trạng thái Active ngay từ đầu
+INSERT INTO Product (Store_id, Ten_san_pham, Mo_ta_chi_tiet, Tinh_trang, Trong_luong, Trang_thai_dang) VALUES
+(3, N'Sách - Đắc Nhân Tâm', N'Dale Carnegie - Nghệ thuật giao tiếp', 'New', 0.35, 'Active'),
+(3, N'Sách - Nhà Giả Kim', N'Paulo Coelho - Tiểu thuyết triết lý', 'New', 0.3, 'Active'),
+(3, N'Sách - Tôi Thấy Hoa Vàng Trên Cỏ Xanh', N'Nguyễn Nhật Ánh - Văn học Việt Nam', 'New', 0.35, 'Active');
+GO
+
+-- Thêm hình ảnh cho các sản phẩm mới (Product_id từ 11-19)
+INSERT INTO [Image] (Product_id, Image_id, Duong_dan_anh) VALUES
+-- Samsung (Product 11, 12, 13)
+(11, 1, 'buds2pro_purple.jpg'),
+(11, 2, 'buds2pro_white.jpg'),
+(12, 1, 'watch6_graphite.jpg'),
+(12, 2, 'watch6_silver.jpg'),
+(13, 1, 'tv55_qled_front.jpg'),
+(13, 2, 'tv55_qled_side.jpg'),
+
+-- Coolmate (Product 14, 15, 16)
+(14, 1, 'short_excool_black.jpg'),
+(14, 2, 'short_excool_navy.jpg'),
+(15, 1, 'somi_basic_white.jpg'),
+(15, 2, 'somi_basic_blue.jpg'),
+(16, 1, 'jacket_wind_black.jpg'),
+(16, 2, 'jacket_wind_navy.jpg'),
+
+-- Fahasa (Product 17, 18, 19)
+(17, 1, 'dacnhantam_cover.jpg'),
+(18, 1, 'nhagiakim_cover.jpg'),
+(19, 1, 'hoavang_cover.jpg');
+GO
+
+-- Thêm mapping Category cho sản phẩm mới
+INSERT INTO Thuoc_ve (Category_id, Product_id) VALUES
+-- Samsung (Category 6: Điện thoại & Phụ kiện, Category 1: Thiết bị điện tử)
+(6, 11),  -- Buds
+(6, 12),  -- Watch
+(1, 13),  -- TV
+
+-- Coolmate (Category 2: Thời trang nam, Category 7: Áo thun)
+(2, 14),  -- Short
+(7, 15),  -- Sơ mi
+(2, 16),  -- Áo khoác
+
+-- Fahasa (Category 8: Sách văn học)
+(8, 17),
+(8, 18),
+(8, 19);
+GO
+
+-- Thêm Variant cho sản phẩm mới
+INSERT INTO Variant (Product_id, SKU, Mau_sac, Kich_thuoc, Gia_ban, So_luong_ton_kho) VALUES
+-- Buds2 Pro (Product 11)
+(11, 'BUDS2PRO-PURPLE', N'Tím', 'Standard', 4990000, 30),
+(11, 'BUDS2PRO-WHITE', N'Trắng', 'Standard', 4990000, 25),
+
+-- Watch 6 (Product 12)
+(12, 'WATCH6-44MM-GRAPH', N'Graphite', '44mm', 7990000, 20),
+(12, 'WATCH6-44MM-SILV', N'Bạc', '44mm', 7990000, 15),
+
+-- TV 55 inch (Product 13)
+(13, 'TV55-QLED-2024', N'Đen', '55 inch', 18990000, 10),
+
+-- Short Excool (Product 14)
+(14, 'SHORT-EX-BLK-M', N'Đen', 'M', 199000, 50),
+(14, 'SHORT-EX-BLK-L', N'Đen', 'L', 199000, 60),
+(14, 'SHORT-EX-NAV-M', N'Navy', 'M', 199000, 45),
+(14, 'SHORT-EX-NAV-L', N'Navy', 'L', 199000, 55),
+
+-- Sơ mi (Product 15)
+(15, 'SHIRT-WHT-M', N'Trắng', 'M', 399000, 40),
+(15, 'SHIRT-WHT-L', N'Trắng', 'L', 399000, 45),
+(15, 'SHIRT-BLU-M', N'Xanh', 'M', 399000, 35),
+
+-- Áo khoác (Product 16)
+(16, 'JACKET-BLK-L', N'Đen', 'L', 599000, 30),
+(16, 'JACKET-NAV-L', N'Navy', 'L', 599000, 25),
+
+-- Sách (Product 17, 18, 19)
+(17, 'BOOK-DNT-BM', N'Bìa Mềm', 'Standard', 86000, 150),
+(17, 'BOOK-DNT-BC', N'Bìa Cứng', 'Standard', 156000, 50),
+(18, 'BOOK-NGK-BM', N'Bìa Mềm', 'Standard', 79000, 200),
+(19, 'BOOK-HV-BM', N'Bìa Mềm', 'Standard', 95000, 180);
+GO
+
+-- Thêm đơn hàng cho sản phẩm mới (đã giao để có thể đánh giá)
+INSERT INTO [Order] (Buyer_id, Trang_thai_don, Dia_chi_giao_hang) VALUES
+(13, N'Đã Giao', N'Ngõ 68 Cầu Giấy'),           -- Mua Buds2 Pro
+(14, N'Đã Giao', N'Biệt thự Thảo Điền, Q2'),   -- Mua Watch 6
+(15, N'Đã Giao', N'Landmark 81'),                -- Mua TV
+(16, N'Đã Giao', N'KTX ĐHQG, Thủ Đức'),        -- Mua Short
+(17, N'Đã Giao', N'Số 5 Láng Hạ'),              -- Mua Sơ mi
+(18, N'Đã Giao', N'Chung cư HAGL, Đà Nẵng'),   -- Mua Áo khoác
+(19, N'Đã Giao', N'Đường Trần Phú, Nha Trang'), -- Mua Đắc Nhân Tâm
+(20, N'Đã Giao', N'Đại Lộ Hòa Bình, Cần Thơ');  -- Mua Nhà Giả Kim
+GO
+
+-- Thêm Order_item cho đơn hàng mới
+INSERT INTO Order_item (Order_id, Item_id, Product_id, SKU, So_luong) VALUES
+(13, 1, 11, 'BUDS2PRO-PURPLE', 1),
+(14, 1, 12, 'WATCH6-44MM-GRAPH', 1),
+(15, 1, 13, 'TV55-QLED-2024', 1),
+(16, 1, 14, 'SHORT-EX-BLK-L', 2),
+(17, 1, 15, 'SHIRT-WHT-L', 1),
+(18, 1, 16, 'JACKET-BLK-L', 1),
+(19, 1, 17, 'BOOK-DNT-BM', 1),
+(20, 1, 18, 'BOOK-NGK-BM', 1);
+GO
+
+-- Thêm Payment cho đơn hàng mới
+INSERT INTO Payment (Order_id, Trang_thai_thanh_toan, Phuong_thuc_thanh_toan, Ma_giao_dich) VALUES
+(13, N'Đã Thanh Toán', 'ShopeePay', 'SPP220001'),
+(14, N'Đã Thanh Toán', 'Credit Card', 'VISA220002'),
+(15, N'Đã Thanh Toán', 'Bank Transfer', 'VCB220003'),
+(16, N'Đã Thanh Toán', 'COD', 'COD220004'),
+(17, N'Đã Thanh Toán', 'ShopeePay', 'SPP220005'),
+(18, N'Đã Thanh Toán', 'COD', 'COD220006'),
+(19, N'Đã Thanh Toán', 'SPayLater', 'SPL220007'),
+(20, N'Đã Thanh Toán', 'Bank Transfer', 'ACB220008');
+GO
+
+-- Thêm Shipment cho đơn hàng mới
+INSERT INTO Shipment (Order_id, Shipper_id, Phuong_thuc_van_chuyen, Ma_theo_doi, Ngay_gui, Ngay_giao_du_kien, Ngay_giao_thuc_te) VALUES
+(13, 1, N'Hỏa Tốc', 'SPX013', DATEADD(d,-3,GETDATE()), DATEADD(d,-1,GETDATE()), DATEADD(d,-1,GETDATE())),
+(14, 2, N'Nhanh', 'GHN014', DATEADD(d,-4,GETDATE()), DATEADD(d,-1,GETDATE()), DATEADD(d,-1,GETDATE())),
+(15, 6, N'Hàng Cồng Kềnh', 'NJV015', DATEADD(d,-5,GETDATE()), DATEADD(d,-2,GETDATE()), DATEADD(d,-2,GETDATE())),
+(16, 3, N'Nhanh', 'GHTK016', DATEADD(d,-3,GETDATE()), DATEADD(d,-1,GETDATE()), DATEADD(d,-1,GETDATE())),
+(17, 2, N'Nhanh', 'GHN017', DATEADD(d,-4,GETDATE()), DATEADD(d,-1,GETDATE()), DATEADD(d,-1,GETDATE())),
+(18, 5, N'Nhanh', 'JT018', DATEADD(d,-3,GETDATE()), DATEADD(d,-1,GETDATE()), DATEADD(d,-1,GETDATE())),
+(19, 3, N'Tiết Kiệm', 'GHTK019', DATEADD(d,-5,GETDATE()), DATEADD(d,-2,GETDATE()), DATEADD(d,-2,GETDATE())),
+(20, 4, N'Nhanh', 'VTP020', DATEADD(d,-4,GETDATE()), DATEADD(d,-1,GETDATE()), DATEADD(d,-1,GETDATE()));
+GO
+
+-- Thêm áp dụng coupon cho đơn hàng mới
+INSERT INTO Ap_dung (Order_id, Item_id, Coupon_id) VALUES
+(13, 1, 1),  -- Giảm 15%
+(14, 1, 3),  -- Giảm 8%
+(15, 1, 8),  -- Giảm 25% (Luxury)
+(16, 1, 4),  -- Giảm 10%
+(17, 1, 1),  -- Giảm 15%
+(18, 1, 5),  -- Giảm 20%
+(19, 1, 6),  -- Giảm 5%
+(20, 1, 6);  -- Giảm 5%
+GO
+
+-- Thêm đánh giá cho sản phẩm mới
+INSERT INTO Danh_gia (Product_id, Order_id, So_sao, Noi_dung_binh_luan, Phan_hoi_cua_nguoi_ban) VALUES
+(11, 13, 5, N'Tai nghe chống ồn tuyệt vời, pin trâu, âm thanh trong trẻo. Đáng tiền!', N'Cảm ơn bạn đã tin dùng sản phẩm Samsung.'),
+(12, 14, 5, N'Đồng hồ đẹp, màn hình sắc nét, theo dõi sức khỏe chính xác. Rất hài lòng.', N'Samsung rất vui khi bạn hài lòng với sản phẩm!'),
+(13, 15, 4, N'Tivi đẹp, màu sắc sống động, nhưng giá hơi cao. Giao hàng cẩn thận.', N'Cảm ơn bạn. Samsung luôn cam kết chất lượng cao cấp.'),
+(14, 16, 5, N'Quần vừa vặn, vải mát lạnh, mặc tập gym rất thoải mái. Sẽ mua thêm!', N'Coolmate cảm ơn bạn. Chúc bạn tập luyện hiệu quả!'),
+(15, 17, 5, N'Áo sơ mi đẹp, vải mềm, form chuẩn. Mặc đi làm sang trọng.', N'Cảm ơn bạn đã lựa chọn Coolmate!'),
+(16, 18, 4, N'Áo khoác nhẹ, chống nước tốt, nhưng hơi ôm. Size L hơi nhỏ.', N'Dạ Coolmate sẽ cải thiện size chart. Cảm ơn góp ý!'),
+(17, 19, 5, N'Sách hay, in đẹp, giấy tốt. Nội dung rất bổ ích cho công việc.', NULL),
+(18, 20, 5, N'Nhà Giả Kim luôn là cuốn sách yêu thích. Fahasa giao nhanh, đóng gói cẩn thận.', NULL);
+GO
+
+
+
 PRINT N'========================================';
 PRINT N'========================================';
 PRINT N'Hoàn thành tạo dữ liệu mẫu';
