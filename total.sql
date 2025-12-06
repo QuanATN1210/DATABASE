@@ -602,16 +602,16 @@ GO
 
 -- 11. INSERT IMAGE (ĐÃ CẬP NHẬT LINK ẢNH PLACEHOLDER)
 INSERT INTO [Image] (Product_id, Image_id, Duong_dan_anh) VALUES
-(1, 1, 'https://placehold.co/400x400/252f3f/white?text=S24+Ultra'), 
-(2, 1, 'https://placehold.co/400x400/252f3f/white?text=Polo+Excool'), 
-(3, 1, 'https://placehold.co/400x400/252f3f/white?text=Cay+Cam+Ngot'),
-(4, 1, 'https://placehold.co/400x400/252f3f/white?text=Anker+Cable'), 
-(5, 1, 'https://placehold.co/400x400/252f3f/white?text=LRP+B5'), 
-(6, 1, 'https://placehold.co/400x400/252f3f/white?text=LocknLock+Fryer'),
-(7, 1, 'https://placehold.co/400x400/252f3f/white?text=Bitis+Hunter'), 
-(8, 1, 'https://placehold.co/400x400/252f3f/white?text=Hades+Tee'), 
-(9, 1, 'https://placehold.co/400x400/252f3f/white?text=Kho+Ga'), 
-(10, 1, 'https://placehold.co/400x400/252f3f/white?text=Guong+Go');
+(1, 1, N'./Ảnh Minh Họa/SSG_S24_Ultra.jpg'), 
+(2, 1, N'./Ảnh Minh Họa/Ao_Polo_Nam.jfif'), 
+(3, 1, N'./Ảnh Minh Họa/Cay_Cam_Ngot.jpg'),
+(4, 1, N'./Ảnh Minh Họa/Cap_Sac_Anker.jpg'), 
+(5, 1, N'./Ảnh Minh Họa/Kem_Duong_La_Roche.png'), 
+(6, 1, N'./Ảnh Minh Họa/Noi_Chien_Khong_Dau.jpg'),
+(7, 1, N'./Ảnh Minh Họa/Giay_Bitis_HunterX.jfif'), 
+(8, 1, N'./Ảnh Minh Họa/Ao_Thun_Hades.jfif'), 
+(9, 1, N'./Ảnh Minh Họa/Kho_Ga_La_Chanh_500G.jfif'), 
+(10, 1, N'./Ảnh Minh Họa/Guong_Dung_Toan_Than.jpg');
 GO
 
 -- 12. INSERT THUOC_VE (Mapping)
@@ -771,25 +771,25 @@ GO
 -- Thêm hình ảnh cho các sản phẩm mới (Product_id từ 11-19) - ĐÃ CẬP NHẬT LINK ẢNH
 INSERT INTO [Image] (Product_id, Image_id, Duong_dan_anh) VALUES
 -- Samsung (Product 11, 12, 13)
-(11, 1, 'https://placehold.co/400x400/252f3f/white?text=Buds2+Pro+Purple'),
-(11, 2, 'https://placehold.co/400x400/252f3f/white?text=Buds2+Pro+White'),
-(12, 1, 'https://placehold.co/400x400/252f3f/white?text=Watch6+Graphite'),
-(12, 2, 'https://placehold.co/400x400/252f3f/white?text=Watch6+Silver'),
-(13, 1, 'https://placehold.co/400x400/252f3f/white?text=TV+QLED+Front'),
-(13, 2, 'https://placehold.co/400x400/252f3f/white?text=TV+QLED+Side'),
+(11, 1, N'./Ảnh Minh Họa/Buds2_Purple.jfif'),
+(11, 2, N'./Ảnh Minh Họa/Buds2_White.jfif'),
+(12, 1, N'./Ảnh Minh Họa/Watch6_Graphite.jfif'),
+(12, 2, N'./Ảnh Minh Họa/Watch6_Silver.jfif'),
+(13, 1, N'./Ảnh Minh Họa/TV_QLED_Front.jfif'),
+(13, 2, N'./Ảnh Minh Họa/TV_QLED_Side.jfif'),
 
 -- Coolmate (Product 14, 15, 16)
-(14, 1, 'https://placehold.co/400x400/252f3f/white?text=Short+Excool+Black'),
-(14, 2, 'https://placehold.co/400x400/252f3f/white?text=Short+Excool+Navy'),
-(15, 1, 'https://placehold.co/400x400/252f3f/white?text=Shirt+Basic+White'),
-(15, 2, 'https://placehold.co/400x400/252f3f/white?text=Shirt+Basic+Blue'),
-(16, 1, 'https://placehold.co/400x400/252f3f/white?text=Jacket+Wind+Black'),
-(16, 2, 'https://placehold.co/400x400/252f3f/white?text=Jacket+Wind+Navy'),
+(14, 1, N'./Ảnh Minh Họa/Short_Excool_Black.jfif'),
+(14, 2, N'./Ảnh Minh Họa/Short_Excool_Navy.jfif'),
+(15, 1, N'./Ảnh Minh Họa/Shirt_Basic_White.jfif'),
+(15, 2, N'./Ảnh Minh Họa/Shirt_Basic_Blue.jfif'),
+(16, 1, N'./Ảnh Minh Họa/Jacket_Wind_Black.jfif'),
+(16, 2, N'./Ảnh Minh Họa/Jacket_Wind_Navy.jfif'),
 
 -- Fahasa (Product 17, 18, 19)
-(17, 1, 'https://placehold.co/400x400/252f3f/white?text=Dac+Nhan+Tam'),
-(18, 1, 'https://placehold.co/400x400/252f3f/white?text=Nha+Gia+Kim'),
-(19, 1, 'https://placehold.co/400x400/252f3f/white?text=Hoa+Vang+Co+Xanh');
+(17, 1, N'./Ảnh Minh Họa/Dac_Nhan_Tam.jfif'),
+(18, 1, N'./Ảnh Minh Họa/Nha_Gia_Kim.jfif'),
+(19, 1, N'./Ảnh Minh Họa/Toi_Thay_Hoa_Vang_Co_Xanh.jfif');
 GO
 
 -- Thêm mapping Category cho sản phẩm mới
@@ -957,19 +957,19 @@ GO
 -- ============================================================
 INSERT INTO [Image] (Product_id, Image_id, Duong_dan_anh) VALUES
 -- Samsung
-(20, 1, 'https://img.samsung.com/s23fe_mint.jpg'),
-(21, 1, 'https://img.samsung.com/soundbar_q990c.jpg'),
-(22, 1, 'https://img.samsung.com/a55_navy.jpg'),
-(23, 1, 'https://img.samsung.com/monitor_m8_white.jpg'),
-(24, 1, 'https://img.samsung.com/airdresser.jpg'),
-(25, 1, 'https://img.samsung.com/jet75_vacuum.jpg'),
+(20, 1, N'./Ảnh Minh Họa/s23_fe_green.jfif'),
+(21, 1, N'./Ảnh Minh Họa/soundbar_q990c.jfif'),
+(22, 1, N'./Ảnh Minh Họa/a55_navy.jfif'),
+(23, 1, N'./Ảnh Minh Họa/monitor_m8_white.jfif'),
+(24, 1, N'./Ảnh Minh Họa/airdresser.jfif'),
+(25, 1, N'./Ảnh Minh Họa/jet75_vacuum.jfif'),
 -- Coolmate
-(26, 1, 'https://img.coolmate.me/polo_promax_blue.jpg'),
-(27, 1, 'https://img.coolmate.me/jogger_kaki_black.jpg'),
-(28, 1, 'https://img.coolmate.me/hoodie_grey.jpg'),
-(29, 1, 'https://img.coolmate.me/boxer_modal_set3.jpg'),
-(30, 1, 'https://img.coolmate.me/tanktop_gym_red.jpg'),
-(31, 1, 'https://img.coolmate.me/socks_bamboo_high.jpg');
+(26, 1, N'./Ảnh Minh Họa/polo_promax_blue.jfif'),
+(27, 1, N'./Ảnh Minh Họa/jogger_kaki_black.jfif'),
+(28, 1, N'./Ảnh Minh Họa/hoodie_grey.jfif'),
+(29, 1, N'./Ảnh Minh Họa/boxer_modal_set3.jfif'),
+(30, 1, N'./Ảnh Minh Họa/tanktop_gym_red.jfif'),
+(31, 1, N'./Ảnh Minh Họa/socks_bamboo_high.jfif');
 GO
 
 -- ============================================================

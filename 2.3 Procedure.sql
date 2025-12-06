@@ -136,8 +136,8 @@ GO
 
 GO
 CREATE OR ALTER PROCEDURE sp_XemChiTiet_SanPham
-    @Product_id INT,                    -- ID sản phẩm cần xem (bắt buộc)
-    @Store_id INT = NULL                -- ID cửa hàng (tùy chọn, để kiểm tra quyền)
+    @Product_id INT,
+    @Store_id INT = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -169,31 +169,26 @@ BEGIN
         p.Trang_thai_dang,
         p.Ngay_dang,
         
-        -- Thông tin tổng hợp
-        COUNT(DISTINCT v.SKU) AS Tong_so_variant,
-        MIN(v.Gia_ban) AS Gia_thap_nhat,
-        MAX(v.Gia_ban) AS Gia_cao_nhat,
-        SUM(v.So_luong_ton_kho) AS Tong_ton_kho,
+        -- ✅ Thông tin tổng hợp từ SUBQUERY (tránh duplicate)
+        (SELECT COUNT(SKU) FROM Variant WHERE Product_id = @Product_id) AS Tong_so_variant,
+        (SELECT MIN(Gia_ban) FROM Variant WHERE Product_id = @Product_id) AS Gia_thap_nhat,
+        (SELECT MAX(Gia_ban) FROM Variant WHERE Product_id = @Product_id) AS Gia_cao_nhat,
+        (SELECT SUM(So_luong_ton_kho) FROM Variant WHERE Product_id = @Product_id) AS Tong_ton_kho,
         
-        -- Thông tin đánh giá
-        AVG(CAST(dg.So_sao AS FLOAT)) AS Diem_danh_gia_TB,
-        COUNT(DISTINCT dg.Order_id) AS So_luot_danh_gia,
+        -- ✅ Thông tin đánh giá từ SUBQUERY
+        (SELECT AVG(CAST(So_sao AS FLOAT)) FROM Danh_gia WHERE Product_id = @Product_id) AS Diem_danh_gia_TB,
+        (SELECT COUNT(Order_id) FROM Danh_gia WHERE Product_id = @Product_id) AS So_luot_danh_gia,
         
-        -- Số lượt đã bán
-        SUM(DISTINCT oi.So_luong) AS Tong_da_ban
+        -- ✅ Số lượt đã bán từ SUBQUERY
+        (SELECT SUM(oi.So_luong) 
+         FROM Order_item oi
+         INNER JOIN [Order] o ON oi.Order_id = o.Order_id
+         WHERE oi.Product_id = @Product_id 
+         AND o.Trang_thai_don = N'Đã Giao') AS Tong_da_ban
         
     FROM Product p
     INNER JOIN Store s ON p.Store_id = s.Store_id
-    LEFT JOIN Variant v ON p.Product_id = v.Product_id
-    LEFT JOIN Danh_gia dg ON p.Product_id = dg.Product_id
-    LEFT JOIN Order_item oi ON p.Product_id = oi.Product_id
-    LEFT JOIN [Order] o ON oi.Order_id = o.Order_id AND o.Trang_thai_don = N'Đã Giao'
-    
-    WHERE p.Product_id = @Product_id
-    GROUP BY 
-        p.Product_id, p.Store_id, s.Ten_gian_hang, p.Ten_san_pham, 
-        p.Mo_ta_chi_tiet, p.Tinh_trang, p.Trong_luong, 
-        p.Trang_thai_dang, p.Ngay_dang;
+    WHERE p.Product_id = @Product_id;
     
     
     -- ========== RESULT SET 2: TẤT CẢ HÌNH ẢNH CỦA SẢN PHẨM ==========
@@ -205,8 +200,7 @@ BEGIN
     ORDER BY Image_id;
     
     
-    -- ========== RESULT SET 3: DANH SÁCH CÁC VARIANT (MÀU SẮC, KÍCH THƯỚC, GIÁ, TỒN KHO) ==========
-    -- Bao gồm aggregate function để tính số lượng đã bán cho từng variant
+    -- ========== RESULT SET 3: DANH SÁCH CÁC VARIANT ==========
     SELECT 
         v.SKU,
         v.Mau_sac,
@@ -214,19 +208,28 @@ BEGIN
         v.Gia_ban,
         v.So_luong_ton_kho,
         
-        -- Tính số lượng đã bán của variant này
-        ISNULL(SUM(CASE WHEN o.Trang_thai_don = N'Đã Giao' THEN oi.So_luong ELSE 0 END), 0) AS So_luong_da_ban,
+        -- ✅ Tính số lượng đã bán của variant này
+        ISNULL((
+            SELECT SUM(oi.So_luong)
+            FROM Order_item oi
+            INNER JOIN [Order] o ON oi.Order_id = o.Order_id
+            WHERE oi.Product_id = v.Product_id 
+            AND oi.SKU = v.SKU
+            AND o.Trang_thai_don = N'Đã Giao'
+        ), 0) AS So_luong_da_ban,
         
-        -- Tính số lượng đang trong đơn hàng chưa giao
-        ISNULL(SUM(CASE WHEN o.Trang_thai_don IN (N'Chờ Xác Nhận', N'Chờ Lấy Hàng', N'Đang Vận Chuyển') 
-                        THEN oi.So_luong ELSE 0 END), 0) AS So_luong_dang_xu_ly
+        -- ✅ Tính số lượng đang trong đơn hàng chưa giao
+        ISNULL((
+            SELECT SUM(oi.So_luong)
+            FROM Order_item oi
+            INNER JOIN [Order] o ON oi.Order_id = o.Order_id
+            WHERE oi.Product_id = v.Product_id 
+            AND oi.SKU = v.SKU
+            AND o.Trang_thai_don IN (N'Chờ Xác Nhận', N'Chờ Lấy Hàng', N'Đang Vận Chuyển')
+        ), 0) AS So_luong_dang_xu_ly
         
     FROM Variant v
-    LEFT JOIN Order_item oi ON v.Product_id = oi.Product_id AND v.SKU = oi.SKU
-    LEFT JOIN [Order] o ON oi.Order_id = o.Order_id
-    
     WHERE v.Product_id = @Product_id
-    GROUP BY v.SKU, v.Mau_sac, v.Kich_thuoc, v.Gia_ban, v.So_luong_ton_kho
     ORDER BY v.Mau_sac, v.Kich_thuoc;
     
     
