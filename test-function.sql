@@ -1,11 +1,13 @@
+USE ShopeeDB;
+GO
+
 -- =========================================================================================
 -- MINH HỌA GỌI HÀM 1: fn_Tinh_Doanh_Thu_Rong_Store
 -- =========================================================================================
 
-PRINT N'--- TEST CASE 1: Store 1 (Samsung) có bán S24 Ultra trong tháng hiện tại ---'
--- Store 1 bán S24 Ultra (Category 6 - Phí 5%). 
--- Kiểm tra: Lấy doanh thu từ hàm
-SELECT dbo.fn_Tinh_Doanh_Thu_Rong_Store(1, MONTH(GETDATE()), YEAR(GETDATE())) AS Doanh_Thu_Rong_Thuc_Te;
+PRINT N'--- TEST CASE 1: Store 5 (La Roche-Posay)  ---'
+-- Store 5 - ban 2 san pham, phi san 10%
+SELECT dbo.fn_Tinh_Doanh_Thu_Rong_Store(5, MONTH(GETDATE()), YEAR(GETDATE())) AS Doanh_Thu_Rong_Thuc_Te;
 
 PRINT N'--- TEST CASE 2: Store ID không tồn tại (Validate) ---'
 SELECT dbo.fn_Tinh_Doanh_Thu_Rong_Store(999, 11, 2025) AS Ket_Qua_Store_Ao;
@@ -26,9 +28,9 @@ PRINT N'--- TEST CASE 1: Buyer 11 (Có mua hàng thành công và 1 đơn hủy)
 -- Buyer 11 có 1 đơn 'Đã Giao' (có đánh giá, giá trị > 30tr) và 1 đơn 'Đã Hủy'.
 -- Logic tính nhẩm: 
 -- Gốc (100) 
--- + Đơn thành công (10) + Đơn to (5) + Đánh giá (2) = 117
--- - Đơn hủy (20) 
--- => Kết quả mong đợi: 97
+-- + 2 Đơn thành công (10) + 2 Đơn to (5) + 2 Đánh giá (2) = 134
+-- - 1 Đơn hủy (20) 
+-- => Kết quả mong đợi: 114
 SELECT 
     User_id AS BuyerID, 
     Ho + ' ' + Ten AS Ho_Ten,
@@ -43,7 +45,7 @@ SELECT
 FROM [User] WHERE User_id = 12;
 
 PRINT N'--- TEST CASE 3: Buyer ID không tồn tại (Validate) ---'
-SELECT dbo.fn_Tinh_Diem_Uy_Tin_Buyer(99999) AS Ket_Qua_Buyer_Ao; -- Mong đợi: -1
+SELECT dbo.fn_Tinh_Diem_Uy_Tin_Buyer(99999) AS Ket_Qua_Buyer_Ao; -- Mong đợi: NULL
 
 PRINT N'--- TEST CASE 4: Xếp hạng Buyer dựa trên điểm uy tín ---'
 SELECT 
