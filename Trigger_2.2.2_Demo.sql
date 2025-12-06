@@ -13,6 +13,8 @@ DECLARE @Item_AoPolo INT = 2;
 -- Item mới sẽ thêm (Áo Polo)
 
 -- BƯỚC 1: XEM TRẠNG THÁI BAN ĐẦU
+-- Xóa hết coupon cũ của đơn hàng này để đảm bảo test bắt đầu từ GIÁ GỐC
+DELETE FROM Ap_dung WHERE Order_id = @TargetOrder;
 PRINT '>>> 1. TRẠNG THÁI HIỆN TẠI (Order 1 đang có 1 món)';
 SELECT 'Bang phu Item (B)' AS Nguon, *
 FROM Shadow_Item_Price
