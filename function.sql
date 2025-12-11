@@ -106,7 +106,7 @@ BEGIN
             IF EXISTS (SELECT 1 FROM Danh_gia WHERE Order_id = @Order_id)
                 SET @Diem_Uy_Tin = @Diem_Uy_Tin + 2;
         END
-        ELSE IF @Trang_thai_don IN (N'Đã Hủy', N'Hoàn Trả')
+        ELSE IF @Trang_thai_don = N'Hoàn Trả'
         BEGIN
             SET @Diem_Uy_Tin = @Diem_Uy_Tin - 20;
         END
@@ -118,6 +118,7 @@ BEGIN
     DEALLOCATE cursor_don_hang;
 
     IF @Diem_Uy_Tin < 0 SET @Diem_Uy_Tin = 0;
+    IF @Diem_Uy_Tin > 200 SET @Diem_Uy_Tin = 200;
 
     RETURN @Diem_Uy_Tin;
 END;

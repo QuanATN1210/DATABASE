@@ -9,10 +9,14 @@ PRINT N'--- TEST CASE 1: Store 5 (La Roche-Posay)  ---'
 -- Store 5 - ban 2 san pham, phi san 10%
 SELECT dbo.fn_Tinh_Doanh_Thu_Rong_Store(5, MONTH(GETDATE()), YEAR(GETDATE())) AS Doanh_Thu_Rong_Thuc_Te;
 
-PRINT N'--- TEST CASE 2: Store ID không tồn tại (Validate) ---'
+PRINT N'--- TEST CASE 2: Store 8 '
+-- Store 8 - ban 1 san pham,gia 450k, phi san 8%, mong doi 414
+SELECT dbo.fn_Tinh_Doanh_Thu_Rong_Store(8, MONTH(GETDATE()), YEAR(GETDATE())) AS Doanh_Thu_Rong_Thuc_Te_store8;
+
+PRINT N'--- TEST CASE 3: Store ID không tồn tại (Validate) ---'
 SELECT dbo.fn_Tinh_Doanh_Thu_Rong_Store(999, 11, 2025) AS Ket_Qua_Store_Ao;
 
-PRINT N'--- TEST CASE 3: Hiển thị danh sách các Store kèm doanh thu ròng tháng này ---'
+PRINT N'--- TEST CASE 4: Hiển thị danh sách các Store kèm doanh thu ròng tháng này ---'
 SELECT 
     s.Store_id,
     s.Ten_gian_hang,
@@ -29,8 +33,8 @@ PRINT N'--- TEST CASE 1: Buyer 11 (Có mua hàng thành công và 1 đơn hủy)
 -- Logic tính nhẩm: 
 -- Gốc (100) 
 -- + 2 Đơn thành công (10) + 2 Đơn to (5) + 2 Đánh giá (2) = 134
--- - 1 Đơn hủy (20) 
--- => Kết quả mong đợi: 114
+
+-- => Kết quả mong đợi: 134
 SELECT 
     User_id AS BuyerID, 
     Ho + ' ' + Ten AS Ho_Ten,
@@ -38,6 +42,9 @@ SELECT
 FROM [User] WHERE User_id = 11;
 
 PRINT N'--- TEST CASE 2: Buyer 12 (Mua nhiều đơn) ---'
+--1 don +10 1 review +2
+--1 hoan tra -20
+--ket qua mong doi: 92
 SELECT 
     User_id AS BuyerID, 
     Ho + ' ' + Ten AS Ho_Ten,
